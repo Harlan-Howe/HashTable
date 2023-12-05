@@ -12,14 +12,37 @@ class BasicAbstractSet(ABC):
         """
         pass
 
+    def __iadd__(self, other) -> "BasicAbstractSet":
+        """
+        A wrapper method for append, which allows us to use "+=" syntax with the set. (e.g., "mySet += item")
+        Ignores the boolean return value of append.
+        :param other: the item to attempt to add to this set.
+        :return: this set, potentially including the added item.
+        """
+        # I've written this for you.
+        self.append(other)
+        return self
+
     @abstractmethod
     def remove(self, item):
         """
-        attempts to remove item from this set. If item was not in the set, returns False. Otherwise, returns True.
+        attempts to remove item from this set, if it is in the set to remove. If item was not in the set, returns False.
+        Otherwise, returns True.
         :param item: item to remove
         :return: whether we have removed the value, decrementing the size of the set by one.
         """
         pass
+
+    def __isub__(self, other):
+        """
+        wrapper method for remove... to implement "-=" syntax. (e.g., "mySet -= item")
+        Ignores the boolean value returned by remove.
+        :param other: the item to remove, if it is present.
+        :return: this set, potentially with one fewer item in it.
+        """
+        # I've written this one for you.
+        self.remove(other)
+        return self
 
     @abstractmethod
     def __contains__(self, item) -> bool:
