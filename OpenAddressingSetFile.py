@@ -1,5 +1,5 @@
 from typing import Tuple
-from AbstractSetFile import BasicAbstractSet, AdvancedAbstractSet
+from AbstractSetFile import BasicAbstractSet, AdvancedAbstractSet, MAX_LOAD_FACTOR
 import numpy as np
 
 class OpenAddressingSet(BasicAbstractSet):

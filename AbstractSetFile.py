@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 
+MAX_LOAD_FACTOR = 0.75
 
 class BasicAbstractSet(ABC):
+
     @abstractmethod
     def append(self, item) -> bool:
         """
