@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 MAX_LOAD_FACTOR = 0.75
+MIN_LOAD_FACTOR = 0.1
 
 class BasicAbstractSet(ABC):
 
