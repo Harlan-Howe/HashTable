@@ -32,25 +32,25 @@ class ColorShape:
     def __repr__(self):
         return f"{self.__color__}\t{self.__letter__}\t{self.__shape_type__}"
 
-    def draw_self_at(self, buffer:np.ndarray, x:int, y:int):
+    def draw_self_at(self, drawing_area: np.ndarray, x:int, y:int):
         if self.__shape_type__ == SHAPE_TYPE_BOX:
-            cv2.rectangle(buffer,(x, y),(x+SIZE, y+SIZE),self.__color__,-1 )
+            cv2.rectangle(drawing_area, (x, y), (x + SIZE, y + SIZE), self.__color__, -1)
         if self.__shape_type__ == SHAPE_TYPE_BALL:
-            cv2.circle(buffer,center=(int(x+SIZE/2), int(y+SIZE/2)),radius= int(SIZE/2), color = self.__color__, thickness=-1)
+            cv2.circle(drawing_area, center=(int(x + SIZE / 2), int(y + SIZE / 2)), radius= int(SIZE / 2), color = self.__color__, thickness=-1)
         if self.__shape_type__ == SHAPE_TYPE_DIAMOND:
             pts = np.array([[int(x + SIZE/2), y],
                    [int(x + SIZE), int(y + SIZE/2)],
                    [int(x + SIZE/2), int(y + SIZE)],
                    [x , int(y + SIZE/2)]], np.int32)
             pts = pts.reshape((-1, 1, 2))
-            cv2.fillPoly(buffer,[pts] ,self.__color__)
+            cv2.fillPoly(drawing_area, [pts], self.__color__)
         if self.__shape_type__ == SHAPE_TYPE_EMPTY_BUT_SCANNABLE:
-            cv2.rectangle(buffer, (x,y), (x+SIZE, y+SIZE), (0,0,0), 1)
-            cv2.line(buffer, (x,y),(x+SIZE, y+SIZE), (0,0,0), 1)
-            cv2.line(buffer, (x+SIZE, y), (x, y + SIZE), (0, 0, 0), 1)
+            cv2.rectangle(drawing_area, (x, y), (x + SIZE, y + SIZE), (0, 0, 0), 1)
+            cv2.line(drawing_area, (x, y), (x + SIZE, y + SIZE), (0, 0, 0), 1)
+            cv2.line(drawing_area, (x + SIZE, y), (x, y + SIZE), (0, 0, 0), 1)
             return  # don't draw the letter if it is an empty spot.
 
-        cv2.putText(buffer, self.__letter__,  (int(x+SIZE/4),int(y+SIZE*3/4)), cv2.FONT_HERSHEY_SIMPLEX, 0.33, (0.25,0.25,0.25))
+        cv2.putText(drawing_area, self.__letter__, (int(x + SIZE / 4), int(y + SIZE * 3 / 4)), cv2.FONT_HERSHEY_SIMPLEX, 0.33, (0.25, 0.25, 0.25))
 
 
 
