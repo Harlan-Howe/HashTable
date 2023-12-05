@@ -65,6 +65,14 @@ class BasicAbstractSet(ABC):
         """
         pass
 
+    @abstractmethod
+    def get_load_factor(self) -> int:
+        """
+        determines the load factor (lambda) for this hash table.
+        :return: the load factor... (num of items in the hash table)/(length of the hash table)
+        """
+        pass
+
 
 class AdvancedAbstractSet(BasicAbstractSet):
 
@@ -107,5 +115,15 @@ class AdvancedAbstractSet(BasicAbstractSet):
         indicates whether ALL of the items in the other set are contained within this one.
         :param other: another set that might have items overlapping with this one.
         :return: whether the "other" set is entirely contained in this one.
+        """
+        pass
+
+    @abstractmethod
+    def resize(self, desired_table_length: int) -> None:
+        """
+        builds a new Hash Table of the requested size and copies all the data from this set into it. Sets this new
+        table as the table for this Set, replacing the old one.
+        :param desired_table_length: The length of the List (or other structure) used to implement the hash table.
+        :return: None
         """
         pass
