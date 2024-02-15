@@ -39,9 +39,89 @@ def draw_sets() -> None:
     cSet.draw_hash_table(sets_drawing_area, (20, 420))
 
     cv2.imshow("sets", sets_drawing_area)
-    cv2.waitKey(0)
+    cv2.waitKey(1) # wait 1 millisecond for a keystroke before returning. Make this a zero if you want to wait
+    #                  indefinitely for a keystroke.
+
+
+def basic_testing():
+    # this will be a list of items we think are in the sets.
+    added_items = []
+
+    # add 10 items to both sets, and keep them in another array for later reference.
+    for i in range(10):
+        shape = ColorShape()
+        added_items.append(shape)
+        oaSet.append(shape)
+        cSet.append(shape)
+    draw_sets()
+
+    # here's a color shape that we might use outside of the sets.
+    current_color_shape:ColorShape = ColorShape()
+
+    while True:
+        # display the shapes we think are in the sets
+        for i in range(len(added_items)):
+            print(f"{i}\t{added_items[i]}")
+
+        # display the current color shape that is independent of the sets
+        print(f"Current Color Shape: {current_color_shape}")
+
+        # Menu and responses
+        response = input("(A))dd, (R)emove, (F)ind, (G)enerate Random CCS, (P)ick CCS from list? ")
+        response = response[0].lower()
+        if response == "a":
+            prompt = "How many to add? (or -1 to add current shape)"
+            num_to_add = int(input(prompt))
+            if num_to_add == -1:
+                added_OA = oaSet.append(current_color_shape)
+                added_chained = cSet.append(current_color_shape)
+                print(f"\n{added_OA=}\t{added_chained=}")
+                if added_OA and added_chained:
+                    added_items.append(current_color_shape)
+            else:
+                for i in range(num_to_add):
+                    shape = ColorShape()
+                    added_items.append(shape)
+                    oaSet.append(shape)
+                    cSet.append(shape)
+            print("click in the window and press a key to continue.")
+            draw_sets()
+        if response == "r":
+            num = int(input("Which item in the list above? (or -1 for the currrent color shape" ))
+            if num == -1:
+                item_to_remove = current_color_shape
+
+            elif num < 0 or num >= len(added_items):
+                print("out of range.")
+                continue
+            item_to_remove = added_items[num]
+            del(added_items[num])
+            oaSet.remove(item_to_remove)
+            cSet.remove(item_to_remove)
+            print("click in the window and press a key to continue.")
+            draw_sets()
+        if response == "f":
+            num = int(input("Which item in the list above, or -1 for the current color shape?"))
+            if num == -1:
+                item_to_find = current_color_shape
+            else:
+                if num < 0 or num >= len(added_items):
+                    print("out of range.")
+                    continue
+                item_to_find = added_items[num]
+            print(f"\nSearching for {item_to_find} --> OpenAddressing: {item_to_find in oaSet} "
+                  f"| ChainAddressing: {item_to_find in cSet}")
+        if response == "g":
+            current_color_shape = ColorShape()
+        if response == "p":
+            num = int(input("which item in the list above should we copy into the current color shape? "))
+            if num < 0 or num >=len(added_items):
+                print("out of range.")
+                continue
+            current_color_shape = added_items[num]
+
 
 
 if __name__ == '__main__':
     demo_drawing()
-    draw_sets()
+    basic_testing()  # tests methods in basic test. Also handy for testing resizing/refactoring.
