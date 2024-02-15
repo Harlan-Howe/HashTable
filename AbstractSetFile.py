@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 MAX_LOAD_FACTOR = 0.75
 MIN_LOAD_FACTOR = 0.1
@@ -46,7 +47,6 @@ class BasicAbstractSet(ABC):
     #     :param object: which object are we looking for?
     #     :return: whether object is already in the hash table at location index.
     #     """
-    #     pass
 
     def __isub__(self, other):
         """
@@ -86,7 +86,16 @@ class BasicAbstractSet(ABC):
         """
         pass
 
-
+    @abstractmethod
+    def to_list(self) -> List:
+        """
+        creates a new list of the items in this Set, in no particular order. It should:
+        a) be independent of the data storage for this list... that is, if the user changes something about the list
+        returned, it should NOT alter this set.
+        b) not include any of the "empty but searchable" items in the OpenAddressing set or Linked Lists in the
+        resulting list.
+        :return: A list of the items in this set.
+        """
 
 
 class AdvancedAbstractSet(BasicAbstractSet):
