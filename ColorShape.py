@@ -52,6 +52,45 @@ class ColorShape:
 
         cv2.putText(drawing_area, self.__letter__, (int(x + SIZE / 4), int(y + SIZE * 3 / 4)), cv2.FONT_HERSHEY_SIMPLEX, 0.33, (0.25, 0.25, 0.25))
 
+    def __eq__(self, __value):
+        """
+        lets the "==" operator work for ColorShapes.
+        :param __value: another ColorShape to compare
+        :return: whether the content of this shape and the __value ColorShape match perfectly.
+        """
+        if not isinstance(__value, ColorShape):
+            return False
+        if self.__shape_type__ != __value.__shape_type__:
+            return False
+        if self.__letter__ != __value.__letter__:
+            return False
+        if self.__color__ != __value.__color__:
+            return False
+        return True
 
+    def __hash__(self):
+        """
+        lets the "hash()" method work on ColorShapes....
+        :return: a hash code for this ColorShape object.
+        """
+        return hash(self.__letter__) + hash(self.__color__) + hash(self.__shape_type__)
+
+    @classmethod
+    def deleted_spot(cls):
+        """
+        a 'factory" method that will create one of the empty-but-scannable ColorShapes. Invoke by
+        something like
+        blankspot = ColorShape.deleted_spot()
+        :return:  a new ColorShape object with the shapetype of SHAPE_TYPE_EMPTY_BUT_SCANNABLE
+        """
+        return ColorShape(shape_type=SHAPE_TYPE_EMPTY_BUT_SCANNABLE)
+
+    def is_real(self) -> bool:
+        """
+        convenience method for determining whether a ColorShape is one of the box, circle or trianlge type, rather
+        than the placeholder (empty-but-scannable) type.
+        :return: whether this is an actual, shape of type square, circle, diamond.
+        """
+        return self.__shape_type__ != SHAPE_TYPE_EMPTY_BUT_SCANNABLE
 
 
