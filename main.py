@@ -1,5 +1,6 @@
 from OpenAddressingSetFile import OpenAddressingSet
 from ChainedSetFile import ChainedSet
+from AbstractSetFile import AdvancedAbstractSet
 from ColorShape import ColorShape, SHAPE_TYPE_EMPTY_BUT_SCANNABLE, SHAPE_TYPE_BALL, SHAPE_TYPE_DIAMOND, SHAPE_TYPE_BOX
 import numpy as np
 import cv2
@@ -120,8 +121,57 @@ def basic_testing():
                 continue
             current_color_shape = added_items[num]
 
+def advanced_test_for_two_sets(set1:AdvancedAbstractSet, set2:AdvancedAbstractSet):
+    for i in range(20):
+        cs = ColorShape()
+        if random.random() < 0.5:
+            set1 += cs
+        if random.random() < 0.5:
+            set2 += cs
 
+    print(f"Set 1: {simplified_set_list(set1.to_list())}")
+    print(f"Set 2: {simplified_set_list(set2.to_list())}")
+
+    print("-"*20)
+    print(f"Set 1 - Set 2: {simplified_set_list((set1 - set2).to_list())}")
+    print(f"Set 2 - Set 1: {simplified_set_list((set2 - set1).to_list())}")
+
+    print("-"*20)
+    print(f"Set1 and Set2: {simplified_set_list((set1 & set2).to_list())}" )
+    print(f"Set1 or Set2: {simplified_set_list((set1 | set2).to_list())}")
+
+    print("-"*20)
+
+    print(f"(s1-s2) | (s1 & s2): {simplified_set_list(((set1-set2) | (set1 & set2)).to_list())}")
+    print(f"s1:                  {simplified_set_list(set1.to_list())}")
+    print("These should match....")
+
+    print("-" * 20)
+    print(f"Set1 subset of Set2: {set2.subset(set1)}")
+    print(f"Set2 subset of Set1: {set1.subset(set2)}")
+    print(f"(s1-s2) subset of Set1: {set1.subset(set1-set2)}")
+    print(f"(s1-s2) subset of Set2: {set2.subset(set1 - set2)}")
+    print(f"(s1 & s2) subset of Set1: {set1.subset(set1 & set2)}")
+    print(f"(s1 & s2) subset of Set2: {set2.subset(set1 & set2)}")
+    print(f"(s1 | s2) subset of Set1: {set1.subset(set1 | set2)}")
+    print(f"Set1 subset of (s1 | s2): {(set1 | set2).subset(set1)}")
+
+def simplified_set_list(list_from_set: List[ColorShape]) -> List[str]:
+    output:List[str] = []
+    for cs in list_from_set:
+        output.append(f"{cs.__letter__} {cs.__shape_type__}")
+    return output
+
+def test_advanced_methods_for_both_set_types():
+    print ("Testing advanced methods for OpenAddressing")
+    advanced_test_for_two_sets(OpenAddressingSet(), OpenAddressingSet())
+    print("="*40)
+    print("Testing advanced methods for Chained")
+    advanced_test_for_two_sets(ChainedSet(), ChainedSet())
 
 if __name__ == '__main__':
+    # You probably only want one of these three at a time:
+
     demo_drawing()
-    basic_testing()  # tests methods in basic test. Also handy for testing resizing/refactoring.
+    # basic_testing()  # tests methods in basic test. Also handy for testing resizing/refactoring.
+    # test_advanced_methods_for_both_set_types()
