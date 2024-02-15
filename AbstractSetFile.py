@@ -36,6 +36,18 @@ class BasicAbstractSet(ABC):
         """
         pass
 
+    # @abstractmethod
+    # def is_a_match(self, index: int, object: ColorShape) -> bool:
+    #     """
+    #     RECOMMENDED BUT NOT REQUIRED - I just think this will be handy for you, because you might use it in more than
+    #     one place. -- HH
+    #     determines whether the given object is also stored at the given index in the hashtable
+    #     :param index: which index might the object be stored?
+    #     :param object: which object are we looking for?
+    #     :return: whether object is already in the hash table at location index.
+    #     """
+    #     pass
+
     def __isub__(self, other):
         """
         wrapper method for remove... to implement "-=" syntax. (e.g., "mySet -= item")
@@ -73,6 +85,8 @@ class BasicAbstractSet(ABC):
         :return: the load factor... (num of items in the hash table)/(length of the hash table)
         """
         pass
+
+
 
 
 class AdvancedAbstractSet(BasicAbstractSet):
