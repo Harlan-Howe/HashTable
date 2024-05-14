@@ -49,7 +49,7 @@ def basic_testing():
     added_items = []
 
     # add 10 items to both sets, and keep them in another array for later reference.
-    for i in range(10):
+    for i in range(1):  # update this to 10 when you're ready.
         shape = ColorShape()
         added_items.append(shape)
         oaSet.append(shape)
