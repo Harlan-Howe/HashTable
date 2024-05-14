@@ -25,7 +25,8 @@ def demo_drawing():
     deadShape.draw_self_at(drawing_area, 200,200)
 
     cv2.imshow("test",drawing_area)
-    cv2.waitKey(0)
+    print("Click in the window and press any key to continue.")
+    cv2.waitKey(0)  # wait for user to press a key...
     cv2.destroyAllWindows()
 
 
