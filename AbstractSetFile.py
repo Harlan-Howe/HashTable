@@ -134,7 +134,7 @@ class AdvancedAbstractSet(BasicAbstractSet):
         pass
 
     @abstractmethod
-    def subset(self, other: BasicAbstractSet) -> bool:
+    def contains_all(self, other: BasicAbstractSet) -> bool:
         """
         indicates whether ALL of the items in the other set are contained within this one.
         :param other: another set that might have items overlapping with this one.
