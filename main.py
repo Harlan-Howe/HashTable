@@ -148,14 +148,14 @@ def advanced_test_for_two_sets(set1:AdvancedAbstractSet, set2:AdvancedAbstractSe
     print("These should match....")
 
     print("-" * 20)
-    print(f"Set1 subset of Set2: {set2.subset(set1)}")
-    print(f"Set2 subset of Set1: {set1.subset(set2)}")
-    print(f"(s1-s2) subset of Set1: {set1.subset(set1-set2)}")
-    print(f"(s1-s2) subset of Set2: {set2.subset(set1 - set2)}")
-    print(f"(s1 & s2) subset of Set1: {set1.subset(set1 & set2)}")
-    print(f"(s1 & s2) subset of Set2: {set2.subset(set1 & set2)}")
-    print(f"(s1 | s2) subset of Set1: {set1.subset(set1 | set2)}")
-    print(f"Set1 subset of (s1 | s2): {(set1 | set2).subset(set1)}")
+    print(f"Set1 subset of Set2: {set2.contains_all(set1)}")
+    print(f"Set2 subset of Set1: {set1.contains_all(set2)}")
+    print(f"(s1-s2) subset of Set1: {set1.contains_all(set1 - set2)}")
+    print(f"(s1-s2) subset of Set2: {set2.contains_all(set1 - set2)}")
+    print(f"(s1 & s2) subset of Set1: {set1.contains_all(set1 & set2)}")
+    print(f"(s1 & s2) subset of Set2: {set2.contains_all(set1 & set2)}")
+    print(f"(s1 | s2) subset of Set1: {set1.contains_all(set1 | set2)}")
+    print(f"Set1 subset of (s1 | s2): {(set1 | set2).contains_all(set1)}")
 
 def simplified_set_list(list_from_set: List[ColorShape]) -> List[str]:
     output:List[str] = []
