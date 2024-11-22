@@ -70,6 +70,16 @@ class BasicAbstractSet(ABC):
         pass
 
     @abstractmethod
+    def is_a_match(self, index: int, item) -> bool:
+        """
+        determines whether the given item is also stored at the given index in the hashtable
+        :param index: which index might the object be stored?
+        :param item: which object are we looking for?
+        :return: whether object is already in the hash table at location index.
+        """
+        pass
+
+    @abstractmethod
     def __len__(self) -> int:
         """
         get the number of items in the set
