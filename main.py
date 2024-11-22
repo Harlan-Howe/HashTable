@@ -1,3 +1,5 @@
+from typing import List
+
 from OpenAddressingSetFile import OpenAddressingSet
 from ChainedSetFile import ChainedSet
 from AbstractSetFile import AdvancedAbstractSet
