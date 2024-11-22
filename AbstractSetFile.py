@@ -106,6 +106,7 @@ class BasicAbstractSet(ABC):
         resulting list.
         :return: A list of the items in this set.
         """
+        pass
 
 
 class AdvancedAbstractSet(BasicAbstractSet):
