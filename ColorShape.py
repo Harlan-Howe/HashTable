@@ -52,7 +52,7 @@ class ColorShape:
 
         cv2.putText(drawing_area, self.__letter__, (int(x + SIZE / 4), int(y + SIZE * 3 / 4)), cv2.FONT_HERSHEY_SIMPLEX, 0.33, (0.25, 0.25, 0.25))
 
-    def __eq__(self, __value):
+    def __eq__(self, __value) -> bool:
         """
         lets the "==" operator work for ColorShapes.
         :param __value: another ColorShape to compare
@@ -68,7 +68,7 @@ class ColorShape:
             return False
         return True
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         lets the "hash()" method work on ColorShapes....
         :return: a hash code for this ColorShape object.
